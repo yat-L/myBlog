@@ -25,7 +25,7 @@ In this guide:
 
 ### Common error 1: fastai version problem.
 
-One of the most encountered problem is error from fastai. They are mostly costed by not using the same version of fastai installed in heroku 
+One of the most encountered problem is error from fastai. They are mostly caused by not using the same version of fastai installed in heroku 
 and the version of fastai you use the train your **export.pkl** in Google colob or paperspace gradient.
 These error don't have a common message, they are usually like this: 
 
@@ -34,7 +34,7 @@ AttributeError: Can't get attribute 'CrossEntropyLossFlat' on <module 'fastai.la
 ```
 
 These error usually happen because the version of fastai, or any package you install in heroku is not the same, so remember the check them.
-To check the version of you are using in the notebook, call: ``` ! pip show fastai ```.
+To check the version of you are using in the notebook, call: ``` !pip show fastai ```.
 
 Use this command in the environment(e.g. Google Colb, paperspace Gradient) where you originally work on your model and make sure the version is the same.
 
@@ -55,16 +55,49 @@ To see the error message, add it into the Procfile, and your Procfile will look 
 web: voila --port=$PORT --debug --no-browser --enable_nbextensions=True deployment.ipynb
 ```
 
-### Common error 3: 500mb limit
+### Common error 3: 500 mb limit
 
-redce packages, import form googld drive
+Since we are using the free version of heroku, which only have 500 mb of storage, we have to minimize our package installed in heroku.
+Therefore, doing ``` pip freeze > requirements.txt ``` is not a option for generating **requirements.txt**.
+First of all, all the package you installed with pip at the start of the notebook deployment.ipynb should be transfered to **requirements.txt**.
+If you include all the minimum files and package, and the size is still larger than 500 mb, the next step would be linking them from Google drive and 
+other cloud service.
+You should link them by including the following code block at the beginning of **deployment.ipynb**:
 
+```
+import urllib.request
 
+MODEL_URL = "https://drive.google.com/uc?export=download&id=YOUR_FILE_ID"
+urllib.request.urlretrieve(MODEL_URL, "export.pkl")
+
+learner = load_learner(Path("."), "export.pkl")
+```
+
+Make sure to replace the ``` YOUR_FILE_ID ``` in the code block with your own.
+This method not only good for linking your **export.pkl**, it can also be used for other files. For example, image to make your site prettier.
+This can effectively reduce the size needed.
 
 ### Common error 4: Pytorch CPU only version
-use CPU wheel pakage, provide link
+In the [guide](https://course.fast.ai/deployment_heroku) I linked at the start of this tutorial, they include a example **requirements.txt**, which is
+the right one at the time. Since fastai is under heavy development, the pytorch version used in the latest fastai might be different. We also cannot 
+just right pytorch in the **requirements.txt** because heroku have no GPU, and we can only use the CPU version of pytorch.
 
+Therefore, we have to download our own persion of pytorch in this [link](https://download.pytorch.org/whl/torch_stable.html).
+(You can also find the link with a quick google of "pytorch wheel").
 
+To find the right version of pytorch to download, make sure that it start with ``` cpu/torch ``` for CPU only version.
+Also make sure it's for Linux, not Macos or Windows.
+When building the website, heroku have to install the packages in **requirements.txt** and it will tell you which version of pytorch should be used in
+the fastai version of your choice.
+Your **requirements.txt** should looks like this:
+
+```
+https://download.pytorch.org/whl/cpu/torch-1.7.0%2Bcpu-cp36-cp36m-linux_x86_64.whl
+https://download.pytorch.org/whl/cpu/torchvision-0.8.0-cp36-cp36m-linux_x86_64.whl
+fastai
+voila
+ipywidgets
+```
 
 
 ### Alternate method: streamlit
