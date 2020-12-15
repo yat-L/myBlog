@@ -9,7 +9,8 @@ search_exclude: true
 categories: [fastai, heroku]
 image: images/heroku-logo.png
 ---
-![heroku](images/heroku-logo.png)
+
+![]({{ site.baseurl }}/images/heroku-logo.png "heorku logo")
 
 ### Fasitai, voila and heroku
 For anyone learning from the fastai "[Practical Deep Learning for Coders](https://course.fast.ai/)", one of the assignment is to deploy your own machine learning model and create a simple
