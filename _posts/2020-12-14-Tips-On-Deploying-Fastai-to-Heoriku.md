@@ -14,8 +14,7 @@ image: images/heroku-logo.png
 
 ### Fasitai, voila and heroku
 For anyone learning from the fastai "[Practical Deep Learning for Coders](https://course.fast.ai/)", one of the assignment is to deploy your own machine learning model and create a simple
-web application. And Heroku is one of the easiest and fastest way to deploy them. While people claim that it's easy, it can still be hard for someone who have less experience in the 
-python development environment. Here's a list of common error I found in the fastai forum, where people failed to use heroku.
+web application. And Heroku is one of the easiest and fastest way to deploy them. While people claim that it's easy, it can still be hard for someone who have less experience. Here's a list of common error I found in the fastai forum, where people failed to use heroku.
 
 **Disclaimer: This is not a full guide on using heroku, this just list some common problem people encounter when following the
 [fastai guide](https://course.fast.ai/deployment_heroku), and the guide failed to mention. (Probably because the guide is not written for complete beginner)**.
@@ -119,4 +118,6 @@ For more information on using Streamlit on Heroku, check out other blog posts fr
 
 ### Summary
 
-Heroku can be easy to use if you understand what it's doing, if you have other question, feel free the comment below.
+Heroku can be easy to use if you understand what it's doing.
+If you have other question, or point out some mistake you also made when
+dealing with heroku, feel free to  comment below.
