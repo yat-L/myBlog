@@ -1,12 +1,13 @@
 ---
 title: "Common error On deploying Fastai notebook to Heroku"
-description: "Just some tips"
+description: Tips on using Heroku and voila
 layout: post
 toc: true
 comments: true
 hide: false
 search_exclude: true
 categories: [fastai, heroku]
+image: images/heroku-logo.png
 ---
 
 ### Fasitai, voila and heroku
@@ -59,6 +60,7 @@ web: voila --port=$PORT --debug --no-browser --enable_nbextensions=True deployme
 
 Since we are using the free version of heroku, which only have 500 mb of storage, we have to minimize our package installed in heroku.
 Therefore, doing ``` pip freeze > requirements.txt ``` is not a option for generating **requirements.txt**.
+
 First of all, all the package you installed with pip at the start of the notebook deployment.ipynb should be transfered to **requirements.txt**.
 If you include all the minimum files and package, and the size is still larger than 500 mb, the next step would be linking them from Google drive and 
 other cloud service.
@@ -100,4 +102,19 @@ ipywidgets
 ```
 
 
-### Alternate method: streamlit
+### Alternate method: streamlit intead of voila
+Lot's of people are having trouble using voila, but voila is not the only choice out there. One of the other popular choice would be 
+[Streamlit](https://www.streamlit.io/). 
+
+Streamlit is also pretty easy to use and have lots of feature packed in. But the downside is that it do not support Jupyter notebook file .ipynb, only 
+.py is supported, to make this work, you may need to convert .ipynb file to a working .py file, and also change the **requirements.txt** and the
+**Procfile**. **requirement.txt** should include streamlit, and the **Procfile** should change to a command for starting Streamlit.
+
+For more information on using Streamlit on Heroku, check out other blog posts from the community.
+
+[From Streamlit to Heroku](https://towardsdatascience.com/from-streamlit-to-heroku-62a655b7319)
+
+
+### Summary
+
+Heroku can be easy to use if you understand what it's doing, if you have other question, feel free the comment below.
