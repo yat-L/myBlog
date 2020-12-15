@@ -27,7 +27,11 @@ In this guide:
 
 One of the most encountered problem is error from fastai. They are mostly costed by not using the same version of fastai installed in heroku 
 and the version of fastai you use the train your **export.pkl** in Google colob or paperspace gradient.
-These error don't have a common message, they are usually like this: ``` AttributeError: Can't get attribute 'CrossEntropyLossFlat' on <module 'fastai.layers' from '/app/.heroku/python/lib/python3.6/site-packages/fastai/layers.py'> ```.
+These error don't have a common message, they are usually like this: 
+
+``` 
+AttributeError: Can't get attribute 'CrossEntropyLossFlat' on <module 'fastai.layers' from '/app/.heroku/python/lib/python3.6/site-packages/fastai/layers.py'>
+```
 
 These error usually happen because the version of fastai, or any package you install in heroku is not the same, so remember the check them.
 To check the version of you are using in the notebook, call: ``` ! pip show fastai ```.
@@ -37,11 +41,19 @@ Use this command in the environment(e.g. Google Colb, paperspace Gradient) where
 
 ### Common error 2: Wait, you are getting error message??
 
-Some people when they deploy the app, they only see the voila message of which cell not working like this: ``` There was an error when executing cell [3]. Please run Voilà with --debug to see the error message. ```
+Some people when they deploy the app, they only see the voila message of which cell not working like this: 
+
+``` 
+There was an error when executing cell [3]. Please run Voilà with --debug to see the error message.
+```
 
 But then where do I run voila ?? Where should place this --debug flag??
 The answer is the **Procfile**, Procfile is basically the command to run when the Web page start.
-To see the error message, add it into the Procfile, and your Procfile will look something like this: ``` web: voila --port=$PORT --debug --no-browser --enable_nbextensions=True deployment.ipynb ```.
+To see the error message, add it into the Procfile, and your Procfile will look something like this:
+
+```
+web: voila --port=$PORT --debug --no-browser --enable_nbextensions=True deployment.ipynb
+```
 
 ### Common error 3: 500mb limit
 
