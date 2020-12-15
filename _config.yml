@@ -6,8 +6,8 @@
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 
-title: fastpages
-description: An easy to use blogging platform with support for Jupyter Notebooks.
+title: Yat's Blog
+description: Just dude mumbling about some computer stuff
 github_username: yat-L
 # you can comment the below line out if your repo name is not different than your baseurl
 github_repo: "myBlog"
@@ -39,8 +39,7 @@ baseurl: "/myBlog" # the subpath of your site, e.g. "/blog".
 # Github and twitter are optional:
 minima:
   social_links:
-    twitter: fastdotai
-    github: fastai
+    github: yat-L
 
 # Set this to true to get LaTeX math equation support
 use_math: 
@@ -72,7 +71,6 @@ include:
 # This specifies what badges are turned on by default for notebook posts.
 default_badges:
   github: true
-  binder: true
   colab: true
 
 # Escape HTML in post descriptions
