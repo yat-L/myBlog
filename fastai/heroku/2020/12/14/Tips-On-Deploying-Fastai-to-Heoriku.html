@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      2 min read
     
 </span></p>
 
@@ -99,9 +99,9 @@ window.onload = wrap_img;
     <ul class="section-nav">
 <li class="toc-entry toc-h3"><a href="#fasitai-voila-and-heroku">Fasitai, voila and heroku</a></li>
 <li class="toc-entry toc-h3"><a href="#common-error-1-fastai-version-problem">Common error 1: fastai version problem.</a></li>
-<li class="toc-entry toc-h3"><a href="#common-error-2-500mb-limit">Common error 2: 500mb limit</a></li>
-<li class="toc-entry toc-h3"><a href="#common-error-3-pytorch-cpu-only-version">Common error 3: Pytorch CPU only version</a></li>
-<li class="toc-entry toc-h3"><a href="#common-error-4-debugging">Common error 4: Debugging</a></li>
+<li class="toc-entry toc-h3"><a href="#common-error-2-wait-you-are-getting-error-message">Common error 2: Wait, you are getting error message??</a></li>
+<li class="toc-entry toc-h3"><a href="#common-error-3-500mb-limit">Common error 3: 500mb limit</a></li>
+<li class="toc-entry toc-h3"><a href="#common-error-4-pytorch-cpu-only-version">Common error 4: Pytorch CPU only version</a></li>
 <li class="toc-entry toc-h3"><a href="#alternate-method-streamlit">Alternate method: streamlit</a></li>
 </ul><h3 id="fasitai-voila-and-heroku">
 <a class="anchor" href="#fasitai-voila-and-heroku" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fasitai, voila and heroku</h3>
@@ -125,19 +125,33 @@ python development environment. Here’s a list of common error I found in the f
 
 <h3 id="common-error-1-fastai-version-problem">
 <a class="anchor" href="#common-error-1-fastai-version-problem" aria-hidden="true"><span class="octicon octicon-link"></span></a>Common error 1: fastai version problem.</h3>
-<p>One of the most encountered problem is error from fastai.</p>
 
-<h3 id="common-error-2-500mb-limit">
-<a class="anchor" href="#common-error-2-500mb-limit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Common error 2: 500mb limit</h3>
-<p>reduce packages, import form googld drive</p>
+<p>One of the most encountered problem is error from fastai. They are mostly costed by not using the same version of fastai installed in heroku 
+and the version of fastai you use the train your <strong>export.pkl</strong> in Google colob or paperspace gradient.
+These error don’t have a common message, they are usually like this:
+<code class="language-plaintext highlighter-rouge">AttributeError: Can't get attribute 'CrossEntropyLossFlat' on &lt;module 'fastai.layers' from '/app/.heroku/python/lib/python3.6/site-packages/fastai/layers.py'&gt;</code>
+These error usually happen because the version of fastai, or any package you install in heroku is not the same, so remember the check them.
+To check the version of you are using the the notebook, call:
+<code class="language-plaintext highlighter-rouge">! pip show fastai</code>.
+Use this command in the environment(e.g. Google Colb, paperspace Gradient) where you originally work on your model and make sure the version is the same.</p>
 
-<h3 id="common-error-3-pytorch-cpu-only-version">
-<a class="anchor" href="#common-error-3-pytorch-cpu-only-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Common error 3: Pytorch CPU only version</h3>
+<h3 id="common-error-2-wait-you-are-getting-error-message">
+<a class="anchor" href="#common-error-2-wait-you-are-getting-error-message" aria-hidden="true"><span class="octicon octicon-link"></span></a>Common error 2: Wait, you are getting error message??</h3>
+<p>Some people when they deploy the app, they only see the voila message of which cell not working like this:
+<code class="language-plaintext highlighter-rouge">There was an error when executing cell [3]. Please run Voilà with --debug to see the error message.</code>
+But then where do I run voila ?? Where should place this –debug flag??
+The answer is the <strong>Procfile</strong>, Procfile is bascially the command to run when the Webpage start.
+To see the error message, add it into the Procfile, and your Procfile will look something like this:
+``` web: voila –port=$PORT –debug –no-browser –enable_nbextensions=True deployment.ipynb `` .</p>
+
+<h3 id="common-error-3-500mb-limit">
+<a class="anchor" href="#common-error-3-500mb-limit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Common error 3: 500mb limit</h3>
+
+<p>redce packages, import form googld drive</p>
+
+<h3 id="common-error-4-pytorch-cpu-only-version">
+<a class="anchor" href="#common-error-4-pytorch-cpu-only-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Common error 4: Pytorch CPU only version</h3>
 <p>use CPU wheel pakage, provide link</p>
-
-<h3 id="common-error-4-debugging">
-<a class="anchor" href="#common-error-4-debugging" aria-hidden="true"><span class="octicon octicon-link"></span></a>Common error 4: Debugging</h3>
-<p>use –debug flag</p>
 
 <h3 id="alternate-method-streamlit">
 <a class="anchor" href="#alternate-method-streamlit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Alternate method: streamlit</h3>
